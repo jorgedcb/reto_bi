@@ -1,0 +1,50 @@
+parameters
+{'id': '62b4e50da15bde70e02b0f6e', 'length_word': 8, 'vowels': 4, 'consonants': 4}
+1. abiertos
+abiertos - attempt #1
+{'word_sent': 'abiertos', 'score': 0.25, 'try_datetime': '2022-06-23T22:12:03.226984', 'position_array': [True, False, False, False, False, False, False, False], 'right_letters_in_wrong_positions': ['t', 'o'], 'current_attemps': 1}
+actuando
+actuando - attempt #2
+{'word_sent': 'actuando', 'score': 0.375, 'try_datetime': '2022-06-23T22:12:12.449979', 'position_array': [True, False, False, False, False, False, True, True], 'right_letters_in_wrong_positions': ['t', 'a'], 'current_attemps': 2}
+adaptado - attempt #3
+{'word_sent': 'adaptado', 'score': 0.875, 'try_datetime': '2022-06-23T22:15:02.986128', 'position_array': [True, True, False, True, True, True, True, True], 'right_letters_in_wrong_positions': [], 'current_attemps': 3}
+<Response [200]>
+
+
+def new_attempt(self):
+        #index where the list of bools were true
+        correct_index_letters_try = np.where(self.last_result_json['position_array'])[0]
+        #list of letters that are in the correct position
+        letter_correct_position = [self.last_attempt[j] for j in correct_index_letters_try]
+        right_letters = self.last_result_json['right_letters_in_wrong_positions']
+        right_letters.extend(letter_correct_position)
+        #getting index from letters that are in the word but are in wrong position
+        index_letters_wrong_position = [index for index,letter in enumerate(self.last_attempt) if letter in right_letters] 
+        #erase the index if are in the index of correct words
+        incorrect_index_try = [index for index in index_letters_wrong_position if index not in correct_index_letters_try]
+        #enumerate the atempt ex jorge = [(j,0),(o,1)]
+        position_try = list(enumerate(self.last_attempt))
+        #get the tuples that are right
+        list_letter_index_correct = [position_try[j] for j in correct_index_letters_try]
+        #get tupples that the letter exits on the word but are in wrong position
+        self.list_letter_index_incorrect.extend([position_try[j] for j in incorrect_index_try])
+        #print(list_letter_index_incorrect)
+        #list of letters that definitely aren't in the word
+        wrong_letters_last_try = list(set(self.last_attempt) - set(self.last_result_json['right_letters_in_wrong_positions']) - set(letter_correct_position))
+        #right_letters = list(set(right_letters))#quitar esto en un futuro
+        self.wrong_letters.extend(wrong_letters_last_try)
+        if list_letter_index_correct:
+            valid_words = self.filter_position_letter(list_letter_index_correct)
+        else:
+            valid_words = self.valid_words_list()
+        invalid_words = self.filter_position_letter(self.list_letter_index_incorrect)
+        #print('valid_words',valid_words)
+        #print('invalid_words',invalid_words)
+        valid_list = [word for word in valid_words if word not in invalid_words]
+        a_list = [word for word in valid_list if all(invalid_letter not in word for invalid_letter in self.wrong_letters)]
+        #valid letters mean must letters
+        # final_list = [word for word in a_list if all(valid_letter in word for valid_letter in right_letters)]
+        final_list = [word for word in a_list if all(right_letters.count(valid_letter) <= word.count(valid_letter) for valid_letter in right_letters)]
+
+        new_try = self.word_from_list(final_list)
+        return new_try
