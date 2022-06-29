@@ -1,0 +1,201 @@
+[
+    "nuevo juego",
+    {
+        "id": "62bbc5fe45c029137a481fe4",
+        "length_word": 12,
+        "vowels": 5,
+        "consonants": 7
+    },
+    "nuevo juego",
+    {
+        "id": "62bbc63d45c029137a481fe6",
+        "length_word": 9,
+        "vowels": 4,
+        "consonants": 5
+    },
+    "nuevo juego",
+    {
+        "id": "62bbc6a645c029137a481fe8",
+        "length_word": 5,
+        "vowels": 2,
+        "consonants": 3
+    },
+    {
+        "word_sent": "abrid",
+        "score": 0.2,
+        "try_datetime": "2022-06-29T03:46:50.777379",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "a",
+            "d"
+        ],
+        "current_attemps": 2
+    },
+    {
+        "word_sent": "cadmo",
+        "score": 0.4,
+        "try_datetime": "2022-06-29T04:04:59.176965",
+        "position_array": [
+            false,
+            true,
+            true,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 3
+    },
+    {
+        "word_sent": "fadet",
+        "score": 0.4,
+        "try_datetime": "2022-06-29T04:18:30.308866",
+        "position_array": [
+            false,
+            true,
+            true,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 4
+    },
+    {
+        "word_sent": "dadas",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T04:20:38.271319",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 5
+    },
+    "nuevo juego",
+    {
+        "id": "62bbd767393226b679fc4c13",
+        "length_word": 6,
+        "vowels": 2,
+        "consonants": 4
+    },
+    {
+        "word_sent": "actriz",
+        "score": 0.3333333333333333,
+        "try_datetime": "2022-06-29T04:39:10.264572",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "c",
+            "r"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "broche",
+        "score": 0.3333333333333333,
+        "try_datetime": "2022-06-29T04:45:01.582962",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "r",
+            "o",
+            "c"
+        ],
+        "current_attemps": 2
+    },
+    {
+        "word_sent": "corpus",
+        "score": 0.5,
+        "try_datetime": "2022-06-29T04:47:04.457795",
+        "position_array": [
+            true,
+            true,
+            false,
+            true,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "r"
+        ],
+        "current_attemps": 3
+    },
+    {
+        "word_sent": "compro",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T04:48:14.170224",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 4
+    },
+    "nuevo juego",
+    {
+        "id": "62bbdab682d88f9a7e8ba6ea",
+        "length_word": 7,
+        "vowels": 3,
+        "consonants": 4
+    },
+    {
+        "word_sent": "abruzos",
+        "score": 0.42857142857142855,
+        "try_datetime": "2022-06-29T04:53:13.164192",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "a",
+            "r",
+            "s"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "citarse",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T04:53:16.123962",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 2
+    }
+]
