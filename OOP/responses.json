@@ -197,5 +197,392 @@
         ],
         "right_letters_in_wrong_positions": [],
         "current_attemps": 2
+    },
+    "nuevo juego",
+    {
+        "id": "62bcd4ba19ca76dff7025b12",
+        "length_word": 12,
+        "vowels": 5,
+        "consonants": 7
+    },
+    {
+        "word_sent": "republicanos",
+        "score": 0.5,
+        "try_datetime": "2022-06-29T22:40:04.642042",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true
+        ],
+        "right_letters_in_wrong_positions": [
+            "r",
+            "e",
+            "l",
+            "i",
+            "c",
+            "a",
+            "n",
+            "o"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "electronicas",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T22:40:17.562226",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 2
+    },
+    "nuevo juego",
+    {
+        "id": "62bce5289794818054c2f277",
+        "length_word": 5,
+        "vowels": 3,
+        "consonants": 2
+    },
+    {
+        "word_sent": "creia",
+        "score": 0.2,
+        "try_datetime": "2022-06-29T23:50:01.451440",
+        "position_array": [
+            false,
+            false,
+            true,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "suevo",
+        "score": 0.6,
+        "try_datetime": "2022-06-29T23:50:02.291322",
+        "position_array": [
+            false,
+            true,
+            true,
+            false,
+            true
+        ],
+        "right_letters_in_wrong_positions": [
+            "s"
+        ],
+        "current_attemps": 2
+    },
+    {
+        "word_sent": "hueso",
+        "score": 0.8,
+        "try_datetime": "2022-06-29T23:50:03.329578",
+        "position_array": [
+            false,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 3
+    },
+    {
+        "word_sent": "queso",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T23:50:04.331287",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 4
+    },
+    {
+        "overall_time": "0:00:08.381856"
+    },
+    {
+        "code_time": "0:00:04.135011"
+    },
+    "nuevo juego",
+    {
+        "id": "62bce59b29cb2ecc7df4f238",
+        "length_word": 10,
+        "vowels": 5,
+        "consonants": 5
+    },
+    {
+        "word_sent": "refugiados",
+        "score": 0.3,
+        "try_datetime": "2022-06-29T23:51:56.708128",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "r",
+            "u",
+            "i",
+            "a",
+            "d",
+            "o"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "articulado",
+        "score": 0.4,
+        "try_datetime": "2022-06-29T23:51:57.709898",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false,
+            true
+        ],
+        "right_letters_in_wrong_positions": [
+            "a",
+            "r",
+            "i",
+            "c",
+            "d"
+        ],
+        "current_attemps": 2
+    },
+    {
+        "word_sent": "hidraulico",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T23:51:58.491917",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 3
+    },
+    {
+        "overall_time": "0:00:06.661028"
+    },
+    {
+        "code_time": "0:00:02.973036"
+    },
+    "nuevo juego",
+    {
+        "id": "62bce5ab29cb2ecc7df4f23d",
+        "length_word": 11,
+        "vowels": 5,
+        "consonants": 6
+    },
+    {
+        "word_sent": "peloritanos",
+        "score": 0.45454545454545453,
+        "try_datetime": "2022-06-29T23:52:13.132992",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "o",
+            "t",
+            "a",
+            "n",
+            "o",
+            "s"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "conquistado",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T23:52:14.054514",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 2
+    },
+    {
+        "overall_time": "0:00:03.750216"
+    },
+    {
+        "code_time": "0:00:02.510841"
+    },
+    "nuevo juego",
+    {
+        "id": "62bce5b429cb2ecc7df4f241",
+        "length_word": 6,
+        "vowels": 2,
+        "consonants": 4
+    },
+    {
+        "word_sent": "cortas",
+        "score": 0.16666666666666666,
+        "try_datetime": "2022-06-29T23:52:21.913107",
+        "position_array": [
+            false,
+            false,
+            false,
+            false,
+            true,
+            false
+        ],
+        "right_letters_in_wrong_positions": [
+            "r"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "nublar",
+        "score": 0.6666666666666666,
+        "try_datetime": "2022-06-29T23:52:22.713219",
+        "position_array": [
+            false,
+            true,
+            false,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 2
+    },
+    {
+        "word_sent": "juglar",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T23:52:23.493286",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 3
+    },
+    {
+        "overall_time": "0:00:03.948102"
+    },
+    {
+        "code_time": "0:00:02.808435"
+    },
+    "nuevo juego",
+    {
+        "id": "62bce5bf29cb2ecc7df4f246",
+        "length_word": 10,
+        "vowels": 4,
+        "consonants": 6
+    },
+    {
+        "word_sent": "competidas",
+        "score": 0.4,
+        "try_datetime": "2022-06-29T23:52:32.410265",
+        "position_array": [
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [
+            "p",
+            "t",
+            "i"
+        ],
+        "current_attemps": 1
+    },
+    {
+        "word_sent": "populistas",
+        "score": 1.0,
+        "try_datetime": "2022-06-29T23:52:33.495991",
+        "position_array": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "right_letters_in_wrong_positions": [],
+        "current_attemps": 2
+    },
+    {
+        "overall_time": "0:00:03.460786"
+    },
+    {
+        "code_time": "0:00:02.465509"
     }
 ]

@@ -12,7 +12,7 @@ class Wordle:
     default_user = ("jorge.castilla", "5cbdaf7e3c844ec882f576ec2ec4c9a4")
     parameters_endpoint = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/get_params"
     results_endpoint = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/check_results"
-    filename = "/home/castilla/Desktop/sofka/reto_bi/OOP/responses.json"
+    filename = "/home/castilla/Desktop/sofka/reto_bi/OOP/responses_beta.json"
 
     def __init__(
         self,
@@ -33,7 +33,7 @@ class Wordle:
         self.__list_results = []
         self.__user = user
         parameters = self._get_parameters()
-        self.__parameters = parameters.json()
+        self.__parameters = parameters
         self.__id = self.__parameters["id"]
         self.__length_word = self.__parameters["length_word"]
         self.__vowels = self.__parameters["vowels"]
@@ -76,11 +76,11 @@ class Wordle:
 
     def _append_result(self, result):
         self.__list_results.append(result)
-        print(result.json())
+        print(result)
 
     def print_results(self):
         for response in self.list_results:
-            print(response.json())
+            print(response)
 
     def _get_parameters(self):
         """The format of the response is:
@@ -90,11 +90,12 @@ class Wordle:
         "consonants": int
         }
         """
-        response = requests.get(self.parameters_endpoint, auth=self.user)
+        #response = requests.get(self.parameters_endpoint, auth=self.user)
+        response = {'id': '62b4e50da15bde70e02b0f6e', 'length_word': 8, 'vowels': 4, 'consonants': 4}
         self.__mycode_time = datetime.datetime.now()
         self._append_response("nuevo juego")
-        self._append_response(response.json())
-        print(response.json())
+        self._append_response(response)
+        print(response)
         return response
 
     @property
@@ -180,9 +181,6 @@ class Wordle:
         self.__df_game = df[df["Words"].isin(valid_words)]
 
     def _create_df_scores(self):
-        """Return a dataframe with how many words are per letter 
-        and index in the words that are still valids."""
-
         alphabet_list = list(string.ascii_lowercase)
         alphabet_list.append("ñ")
         columns = [*range(1, self.length_word + 1)]
@@ -211,7 +209,6 @@ class Wordle:
         return df_score
 
     def get_score(self, word):
-        """Set a score for each word that are still valid."""
         position = 0
         score = 0
         for letter in word:
@@ -220,8 +217,6 @@ class Wordle:
         return score * len(set(word))
 
     def _select_best_word(self, list_words):
-        """Select the word with the best score, this score is set by how common each
-        letter is in a specific position in the remaining valid words."""
         print(f"There are {len(list_words)} possible words left")
         self._filter_df(list_words)
         self._create_df_scores()
@@ -355,12 +350,26 @@ class Wordle:
 
     def send_attemp(self, word):
         self._update_data(word)
-        result = requests.post(
-            self.results_endpoint, json={"result_word": word}, auth=self.user
-        )
-        self._append_response(result.json())
+        # result = requests.post(
+        #     self.results_endpoint, json={"result_word": word}, auth=self.user
+        # )
+        if self.num_attempts == 1:
+            result = {'word_sent': 'caras',
+            'score': 0.5,
+            'try_datetime': '2022-06-29T04:48:14.170224',
+            'position_array': [False, False, False, False, False, False, True, True],
+            'right_letters_in_wrong_positions': ['p','a'],
+            'current_attemps': 4}
+        else:
+            result = {'word_sent': 'malas',
+            'score': 0.5,
+            'try_datetime': '2022-06-29T04:48:14.170224',
+            'position_array': [True, False, False, False, True, True, True, True],
+            'right_letters_in_wrong_positions': ['p'],
+            'current_attemps': 4}
+        self._append_response(result)
         self._append_result(result)
-        self.__last_result_json = result.json()
+        self.__last_result_json = result
         return result
 
     def _security(self):
@@ -422,7 +431,7 @@ class Wordle:
 
     @classmethod
     def append_response(cls, response):
-        """Return all responses stored in the json file."""
+        """Return all responses stored in the json file"""
         listObj = []
         if path.isfile(cls.filename) is False:
             raise Exception("File not found")
