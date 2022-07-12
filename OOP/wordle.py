@@ -5,12 +5,18 @@ import json
 from os import path
 import string
 import datetime
+from connect import Postgres_connection
+from datetime import datetime as dt
+from datetime import timezone
+from datetime import timedelta
 
 
 class Wordle:
 
     default_user = ("jorge.castilla", "5cbdaf7e3c844ec882f576ec2ec4c9a4")
-    parameters_endpoint = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/get_params"
+    parameters_endpoint = (
+        "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/get_params"
+    )
     results_endpoint = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/check_results"
     filename = "/home/castilla/Desktop/sofka/reto_bi/OOP/responses.json"
 
@@ -43,6 +49,7 @@ class Wordle:
         self.__wrong_letters = []
         self.__must_letters = []
         self.__list_letter_index_incorrect = []
+        self._insert_parameters()
 
     @property
     def num_attempts(self):
@@ -96,6 +103,16 @@ class Wordle:
         self._append_response(response.json())
         print(response.json())
         return response
+
+    def _insert_parameters(self):
+        tuple_parameters = (
+            self.id,
+            self.length_word,
+            self.vowels,
+            self.consonants,
+            self.__start_time,
+        )
+        Postgres_connection.insert_game(tuple_parameters)
 
     @property
     def parameters(self):
@@ -203,9 +220,7 @@ class Wordle:
             for i in range(1, self.length_word + 1):
                 count = position_list.count(i)
                 dicts[i] = count
-            df_score = pd.concat(
-                [df_score, pd.DataFrame.from_records([dicts])]
-            )
+            df_score = pd.concat([df_score, pd.DataFrame.from_records([dicts])])
         df_score = df_score.set_index("Letters")
         self.__df_score = df_score
         return df_score
@@ -303,9 +318,7 @@ class Wordle:
     def _final_list(self, valid_words, invalid_words):
         """Return list of words that watch all the filters."""
         right_letters = self.must_letters
-        valid_list = [
-            word for word in valid_words if word not in invalid_words
-        ]
+        valid_list = [word for word in valid_words if word not in invalid_words]
         a_list = [
             word
             for word in valid_list
@@ -361,7 +374,27 @@ class Wordle:
         self._append_response(result.json())
         self._append_result(result)
         self.__last_result_json = result.json()
+        self._insert_attempt()
         return result
+
+    def _insert_attempt(self):
+        result = self.__last_result_json
+        last_id = Postgres_connection.get_last_id()
+        utc_datetime = dt.fromisoformat(result["try_datetime"]).astimezone(
+            timezone.utc
+        )
+        offset = timedelta(hours=10)
+        time = utc_datetime - offset
+        tuple_attempt = (
+            last_id,
+            result["word_sent"],
+            result["score"],
+            time,
+            result["position_array"],
+            result["right_letters_in_wrong_positions"],
+            result["current_attemps"],
+        )
+        Postgres_connection.insert_attempt(tuple_attempt)
 
     def _security(self):
         x = input("Write stop for stop:")
@@ -390,6 +423,16 @@ class Wordle:
         overall_time = end - self.__start_time
         self._append_response({"overall_time": str(overall_time)})
         self._append_response({"code_time": str(code_time)})
+        last_id = Postgres_connection.get_last_id()
+        tuple_information = (
+            last_id,
+            end,
+            code_time,
+            overall_time,
+            self.last_attempt,
+            self.num_attempts,
+        )
+        Postgres_connection.insert_information(tuple_information)
 
     def _append_response(self, response):
         """Add the responses to the json file """

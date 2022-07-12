@@ -10,7 +10,9 @@ import datetime
 class Wordle:
 
     default_user = ("jorge.castilla", "5cbdaf7e3c844ec882f576ec2ec4c9a4")
-    parameters_endpoint = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/get_params"
+    parameters_endpoint = (
+        "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/get_params"
+    )
     results_endpoint = "https://7b8uflffq0.execute-api.us-east-1.amazonaws.com/game/check_results"
     filename = "/home/castilla/Desktop/sofka/reto_bi/OOP/responses_beta.json"
 
@@ -90,8 +92,13 @@ class Wordle:
         "consonants": int
         }
         """
-        #response = requests.get(self.parameters_endpoint, auth=self.user)
-        response = {'id': '62b4e50da15bde70e02b0f6e', 'length_word': 8, 'vowels': 4, 'consonants': 4}
+        # response = requests.get(self.parameters_endpoint, auth=self.user)
+        response = {
+            "id": "62b4e50da15bde70e02b0f6e",
+            "length_word": 8,
+            "vowels": 4,
+            "consonants": 4,
+        }
         self.__mycode_time = datetime.datetime.now()
         self._append_response("nuevo juego")
         self._append_response(response)
@@ -201,9 +208,7 @@ class Wordle:
             for i in range(1, self.length_word + 1):
                 count = position_list.count(i)
                 dicts[i] = count
-            df_score = pd.concat(
-                [df_score, pd.DataFrame.from_records([dicts])]
-            )
+            df_score = pd.concat([df_score, pd.DataFrame.from_records([dicts])])
         df_score = df_score.set_index("Letters")
         self.__df_score = df_score
         return df_score
@@ -298,9 +303,7 @@ class Wordle:
     def _final_list(self, valid_words, invalid_words):
         """Return list of words that watch all the filters."""
         right_letters = self.must_letters
-        valid_list = [
-            word for word in valid_words if word not in invalid_words
-        ]
+        valid_list = [word for word in valid_words if word not in invalid_words]
         a_list = [
             word
             for word in valid_list
@@ -354,19 +357,41 @@ class Wordle:
         #     self.results_endpoint, json={"result_word": word}, auth=self.user
         # )
         if self.num_attempts == 1:
-            result = {'word_sent': 'caras',
-            'score': 0.5,
-            'try_datetime': '2022-06-29T04:48:14.170224',
-            'position_array': [False, False, False, False, False, False, True, True],
-            'right_letters_in_wrong_positions': ['p','a'],
-            'current_attemps': 4}
+            result = {
+                "word_sent": "caras",
+                "score": 0.5,
+                "try_datetime": "2022-06-29T04:48:14.170224",
+                "position_array": [
+                    False,
+                    False,
+                    False,
+                    False,
+                    False,
+                    False,
+                    True,
+                    True,
+                ],
+                "right_letters_in_wrong_positions": ["p", "a"],
+                "current_attemps": 4,
+            }
         else:
-            result = {'word_sent': 'malas',
-            'score': 0.5,
-            'try_datetime': '2022-06-29T04:48:14.170224',
-            'position_array': [True, False, False, False, True, True, True, True],
-            'right_letters_in_wrong_positions': ['p'],
-            'current_attemps': 4}
+            result = {
+                "word_sent": "malas",
+                "score": 0.5,
+                "try_datetime": "2022-06-29T04:48:14.170224",
+                "position_array": [
+                    True,
+                    False,
+                    False,
+                    False,
+                    True,
+                    True,
+                    True,
+                    True,
+                ],
+                "right_letters_in_wrong_positions": ["p"],
+                "current_attemps": 4,
+            }
         self._append_response(result)
         self._append_result(result)
         self.__last_result_json = result
