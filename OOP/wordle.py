@@ -49,7 +49,6 @@ class Wordle:
         self.__wrong_letters = []
         self.__must_letters = []
         self.__list_letter_index_incorrect = []
-        self._insert_parameters()
 
     @property
     def num_attempts(self):
@@ -83,7 +82,7 @@ class Wordle:
 
     def _append_result(self, result):
         self.__list_results.append(result)
-        print(result.json())
+        print(result)
 
     def print_results(self):
         for response in self.list_results:
@@ -103,16 +102,6 @@ class Wordle:
         self._append_response(response.json())
         print(response.json())
         return response
-
-    def _insert_parameters(self):
-        tuple_parameters = (
-            self.id,
-            self.length_word,
-            self.vowels,
-            self.consonants,
-            self.__start_time,
-        )
-        Postgres_connection.insert_game(tuple_parameters)
 
     @property
     def parameters(self):
@@ -372,29 +361,9 @@ class Wordle:
             self.results_endpoint, json={"result_word": word}, auth=self.user
         )
         self._append_response(result.json())
-        self._append_result(result)
+        self._append_result(result.json())
         self.__last_result_json = result.json()
-        self._insert_attempt()
         return result
-
-    def _insert_attempt(self):
-        result = self.__last_result_json
-        last_id = Postgres_connection.get_last_id()
-        utc_datetime = dt.fromisoformat(result["try_datetime"]).astimezone(
-            timezone.utc
-        )
-        offset = timedelta(hours=10)
-        time = utc_datetime - offset
-        tuple_attempt = (
-            last_id,
-            result["word_sent"],
-            result["score"],
-            time,
-            result["position_array"],
-            result["right_letters_in_wrong_positions"],
-            result["current_attemps"],
-        )
-        Postgres_connection.insert_attempt(tuple_attempt)
 
     def _security(self):
         x = input("Write stop for stop:")
@@ -412,27 +381,28 @@ class Wordle:
 
     def play_automatic(self):
         score = 0
-        while score != 1:
+        tries = 0
+        while score != 1 and tries < 6:
             self.send_attemp(self.get_attempt())
             score = self.__last_result_json["score"]
-        self._save_time()
+            tries += 1
+        if tries >= 6:
+            won = False
+        else:
+            won = True
+        self._save_time(won)
+        
 
-    def _save_time(self):
+    def _save_time(self,won):
         end = datetime.datetime.now()
         code_time = end - self.__mycode_time
         overall_time = end - self.__start_time
         self._append_response({"overall_time": str(overall_time)})
         self._append_response({"code_time": str(code_time)})
+        Postgres_connection.insert_game(self.__parameters,code_time,overall_time,won)
         last_id = Postgres_connection.get_last_id()
-        tuple_information = (
-            last_id,
-            end,
-            code_time,
-            overall_time,
-            self.last_attempt,
-            self.num_attempts,
-        )
-        Postgres_connection.insert_information(tuple_information)
+        Postgres_connection.insert_attempts(self.list_results,last_id)
+       
 
     def _append_response(self, response):
         """Add the responses to the json file """
